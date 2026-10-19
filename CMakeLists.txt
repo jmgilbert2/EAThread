@@ -1,8 +1,7 @@
 #-------------------------------------------------------------------------------------------
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 #-------------------------------------------------------------------------------------------
-cmake_minimum_required(VERSION 3.14)
-include(FetchContent)
+cmake_minimum_required(VERSION 3.5)
 project(EAThread CXX)
 
 #-------------------------------------------------------------------------------------------
@@ -22,6 +21,10 @@ include(CommonCppFlags)
 file(GLOB EATHREAD_SOURCES "source/*.cpp")
 add_library(EAThread ${EATHREAD_SOURCES})
 
+if(EATHREAD_BUILD_TESTS)
+    add_subdirectory(test)
+endif()
+
 #-------------------------------------------------------------------------------------------
 # Defines
 #-------------------------------------------------------------------------------------------
@@ -36,17 +39,8 @@ target_include_directories(EAThread PUBLIC include)
 #-------------------------------------------------------------------------------------------
 # Package Dependencies
 #-------------------------------------------------------------------------------------------
-FetchContent_Declare(
-  EABase
-  GIT_REPOSITORY https://github.com/electronicarts/EABase.git
-  GIT_TAG        123363eb82e132c0181ac53e43226d8ee76dea12
-  GIT_SUBMODULES "" # This should be temporary until we update the cyclic submodule dependencies in EABase.
-)
-
-FetchContent_MakeAvailable(EABase)
+if (NOT TARGET EABase)
+    add_subdirectory(test/packages/EABase)
+endif()
 
 target_link_libraries(EAThread EABase)
-
-if(EATHREAD_BUILD_TESTS)
-    add_subdirectory(test)
-endif()

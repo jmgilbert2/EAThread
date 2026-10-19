@@ -19,6 +19,17 @@ Your pull request should:
 	* do not deviate from style already established in the files
 
 
+### Getting the Repository
+
+EAThread uses git submodules for its test dependencies as they are separate git repositories.
+It is recommended to use the following to get the source:
+
+```bash
+git clone https://github.com/jmgilbert2/EAThread
+cd EAThread
+git submodule update --init
+```
+
 ### Running the Unit Tests
 
 EAAssert uses CMake as its build system.
