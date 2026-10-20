@@ -291,7 +291,7 @@ int TestThreadPriorities()
 
 	if(!IsSuperUser())
 	{
-		EA::EAMain::Report("Skipping Thread Priority test because we don't have sufficient system priviliages.\n");
+		EA::EAMain::Report(EA_CHAR8("Skipping Thread Priority test because we don't have sufficient system priviliages.\n"));
 		return nErrorCount;
 	}
 

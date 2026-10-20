@@ -22,11 +22,6 @@ add_definitions(-DEA_OPENSOURCE)
 #-------------------------------------------------------------------------------------------
 include(CommonCppFlags)
 
-# Parts of the test suite fail to compile if char8_t is enabled, so we disable it
-if (EATHREAD_NO_CHAR8T_FLAG)
-    add_compile_options(${EATHREAD_NO_CHAR8T_FLAG})
-endif()
-
 #-------------------------------------------------------------------------------------------
 # Source files
 #-------------------------------------------------------------------------------------------
