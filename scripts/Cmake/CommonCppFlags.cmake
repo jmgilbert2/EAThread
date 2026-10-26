@@ -63,6 +63,11 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     endif()
 endif()
 
+if(MSVC) # cl and clang-cl
+    # ISO volatile semantics: on x86 and x64 both compilers default to the deprecated /volatile:ms.
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /volatile:iso")
+endif()
+
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
